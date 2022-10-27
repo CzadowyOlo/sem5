@@ -1,0 +1,381 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+
+\author{Aleksander Głowacki}
+\title{Sprawozdanie 1}
+\date{20.10.2022}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Zadanie 1.}
+
+
+\subsection{Opis problemu}
+Zadanie dotyczy wyznaczania szczególnych wartości liczbowych:
+\begin{enumerate}
+    \item epsilon maszynowy - 
+    najmniejsza liczbę macheps > 0 taka, że: \\
+     $f l$(1.0+macheps) > 1.0 i $f l$(1.0+macheps) = 1+macheps
+    \item eta - liczba maszynowa eta to najmniejsza wartość większa od 0.0
+    \item MAX - największa wartość liczbową jaką możemy określić w danej arytmetyce
+  \end{enumerate}
+\subsection{Sposób rozwiązania}
+Sprawdzam w pętli czy zachodzi określony warunek z szukaną liczbą\\
+względem liczby $one(typ)$ lub $zero(typ)$. 
+(te funkcje zwracają mi wartość jedynki i zera \\
+w danym sytemie.) \\Gdy warunek zostanie złamany to znajduję szukaną wartość.
+\begin{enumerate}
+    \item $\varepsilon$ - x \\ $cond:$ $one(type) + x/2 \neq one(type)$ 
+    \\ zaczynam z $x = one(type)$ a  w pętli dzielę $x/2$
+    \item $\eta$ - x \\ $cond:$ $x/2 \neq zero(type)$ \\ 
+    zaczynam z $x = one(type)$ a  w pętli dzielę $x/2$ 
+    \item $\text{MAX}$ - x \\ w pierwszej pętli zaczynamy od 
+    $x = one(type)$. W środku pętli mnożymy x razy 2 i zatrzymujemy się, gdy\\ $x*2 = inf$\\
+    Następnie do naszego x dodajemy uzupełnienie o postaci $dodatek = x/2$.\\
+    Zatrzymujemy się gdy $x + dodatek/2 = inf$
+\end{enumerate}
+\newpage
+\subsection{Wyniki}
+    \begin{table}[h]
+        \caption{macheps}
+        \label{epsilon}
+        %\centering
+        \begin{tabular}{|l|l|l|l|}
+            \hline 
+            \textbf{typ danych} & \textbf{moja funkcja} & \textbf{funkcja biblioteczna} & \textbf{float.h}\\
+            \hline
+            \textbf{Float16} & 0.000977 & 0.000977 & brak\\
+            \hline
+            \textbf{Float32} & 1.1920929e-7 & 1.1920929e-7 & 1.192093e-7\\
+            \hline
+            \textbf{Float64} & 2.220446049250313e-16 & 2.220446049250313e-16 & 2.220446e-16\\
+            \hline
+        \end{tabular} 
+    \end{table}
+    \begin{table}[h]
+        \caption{eta}
+        \label{eta}
+        %\centering
+        \begin{tabular}{|l|l|l|}
+            \hline 
+            \textbf{typ danych} & \textbf{moja funkcja} & \textbf{funkcja biblioteczna}\\
+            \hline
+            \textbf{Float16} & 6.0e-8 & 6.0e-8\\
+            \hline
+            \textbf{Float32} & 1.0e-45 & 1.0e-45\\
+            \hline
+            \textbf{Float64} & 5.0e-324 & 5.0e-324 \\
+            \hline
+        \end{tabular} 
+    \end{table}
+
+    \begin{table}[h]
+        \caption{MAX}
+        \label{max}
+        %\centering
+        \begin{tabular}{|l|l|l|}
+            \hline 
+            \textbf{typ danych} & \textbf{moja funkcja} & \textbf{funkcja biblioteczna}\\
+            \hline
+            \textbf{Float16} & 6.55e4 & 6.55e4\\
+            \hline
+            \textbf{Float32} & 3.4028235e38 & 3.4028235e38\\
+            \hline
+            \textbf{Float64} & 1.7976931348623157e308 & 1.7976931348623157e308 \\
+            \hline
+        \end{tabular} 
+    \end{table}
+
+\subsection{Wnioski}
+\begin{enumerate}
+    \item Nie można zaprezentować wszystkich liczb rzeczywistych na komputerze\\
+    W poszczególnych typach danych mamy określoną gęstość liczb oraz zakres.
+    \item Porównując eta z MINsub i floatmin(type) z MINnor zgadza się tylko rząd wielkości
+    \item $macheps = 2* \text{precyzja arytmetyki}$
+\end{enumerate}
+\section{Zadanie 2.}
+
+\subsection{Opis problemu}
+
+Wyznaczenie epsilona maszynowego używając formuły:\\\centerline{$3(4/3-1)-1$}
+
+\subsection{Sposób rozwiązania}
+Przepisanie formuły pamiętając o właściwym podstawieniu wartości 1.0
+\subsection{Wyniki}
+\begin{table}[h]
+    \caption{macheps}
+    \label{macheps}
+    %\centering
+    \begin{tabular}{|l|l|l|}
+        \hline 
+        \textbf{typ danych} & \textbf{moja funkcja} & \textbf{funkcja biblioteczna}\\
+        \hline
+        \textbf{Float16} & -0.000977 & 0.000977\\
+        \hline
+        \textbf{Float32} & 1.1920929e-7  & 1.1920929e-7\\
+        \hline
+        \textbf{Float64} & -2.220446049250313e-16 & 2.220446049250313e-16 \\
+        \hline
+    \end{tabular} 
+\end{table}
+\subsection{Wnioski}
+\begin{enumerate}
+    \item Otrzymane przeze mnie wartości mają zgodny moduł z wartościami z funkcji $eps(type)$
+\end{enumerate}
+\section{Zadanie 3.}
+
+\subsection{Opis problemu}
+Zbadać gęstość przedziałów liczbowych:
+\begin{enumerate}
+    \item $[\frac{1}{2}, 1)$
+    \item $[1, 2)$
+    \item $[2, 4)$
+\end{enumerate}
+\subsection{Sposób rozwiązania}
+\begin{enumerate}
+    \item Iterujemy się po przedziale $[1, 2)$ z krokiem $\delta = {2^{-52}}$\\
+    i sprawdzamy czy otrzymaliśmy $nextfloat(liczba)$
+    \item Nie znamy kroku więc jest trudniej.\\
+    Wiemy, że przesunięcie w kodowaniu eksponenty wynosi $1023_{10}$\\
+    Znamy własności systemu dwójkowego. Eksponenta zmienia się nam
+    w kolejnych potęgach liczby 2. Zatem przedziały o takiej samej eksponencie
+    przy dążeniu do $\infty$ będą sie nam rozciągać. \\Jednak ilość bitów w eksponencie i mantysie\\
+    jest stała. \\Co skłania nas do przypuszczenia, że ilość liczb w danym przedzialale\\
+    pomiędzy potęgami 2 jest stała.
+    Funkcją $bitsring$ sprawdzamy czy eksponenta krańcowych liczb z przedziału jest identyczna.\\
+    Zwracamy wartość ${2^{e - 1023 - 52}} $, gdzie $e$ jest eksponentą, 1023 to przesunięcie,
+    a 52 to liczba bitów mantysy
+
+\end{enumerate}
+
+\subsection{Wyniki}
+\begin{table}[h]
+    \caption{macheps}
+    \label{macheps1}
+    %\centering
+    \begin{tabular}{|c|c|c|}
+        \hline 
+        \textbf{$[\frac{1}{2}, 1)$} & \textbf{$[1, 2)$} & \textbf{$[2, 4)$}\\
+        \hline
+        \ 1.1102230246251565e-16 & 2.220446049250313e-16 & 4.440892098500626e-16\\
+        \hline
+    \end{tabular} 
+\end{table}
+\subsection{Wnioski}
+\begin{enumerate}
+    \item Im bliżej zera, tym gęstsze mamy liczby w systemie IEE754 podwójnej precyzji
+    \item kroki pomiędzy liczbami rzeczywistymi wynoszą kolejno:
+    \begin{enumerate}
+        \item ${2^{-53}}$
+        \item ${2^{-52}}$
+        \item ${2^{-51}}$
+    \end{enumerate}
+    \item Przeskoki w gęstościach pokrywają się z przeskokami w potęgach dwójki
+\end{enumerate}
+\section{Zadanie 4.}
+
+\subsection{Opis problemu}
+Znaleźć liczbę $x \in (1, 2)$ taką, że $x * \frac{1}{x} \neq x $
+\subsection{Sposób rozwiązania}
+sprawdzać ten warunek w pętli od $nextfloat(one(Float64))$ aktualizując\\
+$x := nextfloat(x)$
+\subsection{Wyniki}
+$x = 1.000000057228997$
+\subsection{Wnioski}
+W systemie Float64 dzielenie przez liczbę nie jest tożsame z mnożeniem przez odwrotność.
+
+\section{Zadanie 5.}
+
+\subsection{Opis problemu}
+Różne sposoby obliczenia iloczynu skalarnego zadanych wektorów.
+\subsection{Sposób rozwiązania}
+Przepisanie algorytmu z treści zadania do Julii.
+\newpage
+\subsection{Wyniki}
+Wartość dokładna: $-1.00657107000000 * {10^{-11}}$
+\begin{table}[h]
+    \caption{wyniki we Float32}
+    \label{vectors}
+    \centering
+    \begin{tabular}{|l|c|}
+        \hline 
+        \textbf{nr algorytmu} & \textbf{wynik} \\
+        \hline
+        \ 1 & -0.3472038161853561\\
+        \hline
+        \ 2 & -0.3472038162872195\\
+        \hline
+        \ 3 & -0.5\\
+        \hline
+        \ 4 & -0.5\\
+        \hline
+    \end{tabular} 
+\end{table}
+\begin{table}[h]
+    \caption{wyniki we Float64}
+    \label{vectors2}
+    \centering
+    \begin{tabular}{|l|c|}
+        \hline 
+        \textbf{nr algorytmu} & \textbf{wynik} \\
+        \hline
+        \ 1 & 1.0251881368296672e-10\\
+        \hline
+        \ 2 & -1.5643308870494366e-10\\
+        \hline
+        \ 3 & 0.0\\
+        \hline
+        \ 4 & 0.0\\
+        \hline
+    \end{tabular} 
+\end{table}
+\subsection{Wnioski}
+Kolejność wykonywania działań mocno zmienia końcowy wynik.\\
+Wynika to ze względu na utratę precyzji na różnych etapach obliczeń.\\
+Czasem sie straci więcej, czasem mniej. \\
+Tak czy siak każdy wynik ma niewiele wspólnego
+z rzeczywistością.
+\section{Zadanie 6.}
+
+\subsection{Opis problemu}
+Sprawdzić, czy dwie funkcje inaczej zapisane, ale matematycznie równoważne\\
+ zwracają te same wartości dla pewnych danych.
+\begin{center}
+   $f(x) = \sqrt[2]{{x^{2}} + 1} - 1$\\
+\end{center}
+\begin{center}
+    $g(x) = \frac{{x^{2}}}{\sqrt[2]{{x^{2}} + 1} + 1}$
+\end{center}
+\subsection{Sposób rozwiązania}
+Przepisać bezpośrednio powyższe funkcje \\
+i przetestować je dla kolejnych wartości o postaci:\\
+$ x = {8^{-k}}$
+\subsection{Wyniki}
+\begin{table}[h]
+    \caption{wartości funkcji}
+    \label{wartościfg}
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline 
+        \textbf{$k$} & textbf{$f({8^{-k}})$} & \textbf{$g({8^{-k}})$} \\
+        \hline
+        0 & 0.41421356237309515 & 0.4142135623730951\\
+        \hline
+        1 & 0.0077822185373186414 & 0.0077822185373187065\\
+        \hline
+        2 & 0.00012206286282867573 & 0.00012206286282875901\\
+        \hline
+        3 & 1.9073468138230965e-6 & 1.907346813826566e-6\\
+        \hline
+        4 & 2.9802321943606103e-8 & 2.9802321943606116e-8\\
+        \hline
+        5 & 4.656612873077393e-10 & 4.6566128719931904e-10\\
+        \hline
+        6 & 7.275957614183426e-12 & 7.275957614156956e-12\\
+        \hline
+        7 & 1.1368683772161603e-13 & 1.1368683772160957e-13\\
+        \hline
+        8 & 1.7763568394002505e-15 & 1.7763568394002489e-15\\
+        \hline
+        9 & 0.0 & 2.7755575615628914e-17\\
+        \hline
+        10 & 0.0 & 4.336808689942018e-19\\
+        \hline
+        11 & 0.0 & 6.776263578034403e-21\\
+        \hline
+        12 & 0.0 & 1.0587911840678754e-22\\
+        \hline
+        13 & 0.0 & 1.6543612251060553e-24\\
+        \hline
+        14 & 0.0 & 2.5849394142282115e-26\\
+        \hline
+        15 & 0.0 & 4.0389678347315804e-28\\
+        \hline
+        16 & 0.0 & 6.310887241768095e-30\\
+        \hline
+        17 & 0.0 & 9.860761315262648e-32\\
+        \hline
+        18 & 0.0 & 1.5407439555097887e-33\\
+        \hline
+        19 & 0.0 & 2.407412430484045e-35\\
+        \hline
+        20 & 0.0 & 3.76158192263132e-37\\
+        \hline
+        21 & 0.0 & 5.877471754111438e-39\\
+        \hline
+        22 & 0.0 & 9.183549615799121e-41\\
+        \hline
+    \end{tabular} 
+\end{table}
+\subsection{Wnioski}
+    \begin{enumerate}
+        \item Funkcja f i g dają różne wyniki, przy czym g jest dokładniejsza
+        \item Funkcja f w pewnym momencie traci całą precyzję i spada do zera
+        \item Funkcja f radzi sobie gorzej ze względu na odejmowanie 1 od pierwiastka\\
+        gdzie traci precyzję
+        \item Należy tak dobierać kolejność działań, żeby liczba cyfr znaczących nie różniła się zbytnio
+    \end{enumerate}
+\section{Zadanie 7.}
+
+\subsection{Opis problemu}
+Przybliżenie wartości pochodnej funkcji $f(x)$ w punkcie $x$
+\subsection{Sposób rozwiązania}
+Podstawienie wszystkiego do zadanego wzoru, obliczenie pochodnej na papierze.
+\newpage
+\subsection{Wyniki}
+Wartość dokladna: $f'(x) = 0.11694228168853815$
+\begin{table}[h]
+    \caption{wartości funkcji}
+    \label{przyblizenia}
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline 
+        $n$ & przybliżona pochodna & błąd & 1+h \\ \hline
+0 & 2.0179892252685967 & 1.9010469435800585 & 2.0 \\ \hline
+1 & 1.8704413979316472 & 1.753499116243109 & 1.5 \\ \hline
+2 & 1.1077870952342974 & 0.9908448135457593 & 1.25 \\ \hline
+3 & 0.6232412792975817 & 0.5062989976090435 & 1.125 \\ \hline
+4 & 0.3704000662035192 & 0.253457784514981 & 1.0625 \\ \hline
+5 & 0.24344307439754687 & 0.1265007927090087 & 1.03125 \\ \hline
+9 & 0.1248236929407085 & 0.007881411252170345 & 1.001953125 \\ \hline
+10 & 0.12088247681106168 & 0.0039401951225235265 & 1.0009765625 \\ \hline
+15 & 0.11706539714577957 & 0.00012311545724141837 & 1.000030517578125 \\ \hline
+16 & 0.11700383928837255 & 6.155759983439424e-5 & 1.0000152587890625 \\ \hline
+18 & 0.11695767106721178 & 1.5389378673624776e-5 & 1.0000038146972656 \\ \hline
+27 & 0.11694231629371643 & 3.460517827846843e-8 & 1.0000000074505806 \\ \hline
+28 & 0.11694228649139404 & 4.802855890773117e-9 & 1.0000000037252903 \\ \hline
+29 & 0.11694222688674927 & 5.480178888461751e-8 & 1.0000000018626451 \\ \hline
+30 & 0.11694216728210449 & 1.1440643366000813e-7 & 1.0000000009313226 \\ \hline
+35 & 0.11693954467773438 & 2.7370108037771956e-6 & 1.0000000000291038 \\ \hline
+37 & 0.1169281005859375 & 1.4181102600652196e-5 & 1.000000000007276 \\ \hline
+38 & 0.116943359375 & 1.0776864618478044e-6 & 1.000000000003638 \\ \hline
+39 & 0.11688232421875 & 5.9957469788152196e-5 & 1.000000000001819 \\ \hline
+41 & 0.116943359375 & 1.0776864618478044e-6 & 1.0000000000004547 \\ \hline
+43 & 0.1162109375 & 0.0007313441885381522 & 1.0000000000001137 \\ \hline
+50 & 0.0 & 0.11694228168853815 & 1.0000000000000009 \\ \hline
+51 & 0.0 & 0.11694228168853815 & 1.0000000000000004 \\ \hline
+52 & -0.5 & 0.6169422816885382 & 1.0000000000000002 \\ \hline
+53 & 0.0 & 0.11694228168853815 & 1.0 \\ \hline
+54 & 0.0 & 0.11694228168853815 & 1.0 \\ \hline
+    \end{tabular} 
+\end{table}
+\newpage
+\subsection{Wnioski}
+\begin{enumerate}
+    \item Największa precyzja jest dla n = 28
+    \item Błąd rośnie symetrycznie względem środka (n=28) 
+    \item Badając pochodną musimy unikać wartości zbliżonych do 0 w trakcie obliczeń,\\
+    ponieważ tracimy wtedy precyzję. Dla małego n mamy niedokładny wynik z powodu słabego parametru\\
+    ale zwiększanie go do oporu nic nam nie da, bo tracimy precyzję gdy zbliża sie on do 0
+\end{enumerate}
+
+\end{document}
