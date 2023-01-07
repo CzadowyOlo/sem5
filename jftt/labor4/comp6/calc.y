@@ -109,7 +109,7 @@ value:
 void yyerror(std::string s){
   std::cout << "\nBłąd: " << s << std::endl;
 }
-
+//cipa
 int main(int argc, char const * argv[]){
   
     if(argc < 3){
