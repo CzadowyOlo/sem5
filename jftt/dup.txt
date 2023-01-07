@@ -1,0 +1,12 @@
+Używając LEX-a i BISON-a zaimplementuj translator wyrażeń arytmetycznych w ciele
+skończonym o podstawie 1234577 z postaci infiksowej do postaci postfiksowej (odwrotnej notacji polskiej), z korekcją postaci liczby (w ciele o podstawie p nie ma liczb ujemnych i większych lub równych p), i podającej
+wynik obliczenia wyrażenia. Wyrażenia do policzenia umieszczone są w osobnych liniach.
+Program ma przetwarzać wszystkie linie wejścia, a linie zaczynające się od # traktować jak
+linie komentarza i omijać. W przypadku długich linii ma być możliwość ich podzielenie za
+pomocą znaku \ (tak jak w języku c).
+Zadbaj o właściwe priorytety operatorów, właściwą łączność operatorów i odpowiednią
+obsługę błędów. Pamiętaj o unarnym operatorze - dla danych wejściowych (często dla
+wygody w ciele o podstawie p piszemy np. (−1) zamiast (p − 1)). Potęgowanie powinno być dozwolone tylko
+jako operacja uogólniająca mnożenie - nie wolno składać potęg (można liczyć (a^b)^c, ale nie
+można a^(b^c)
+).

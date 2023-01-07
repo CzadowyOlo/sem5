@@ -1,0 +1,56 @@
+2 polożono na stack
+3 polożono na stack
+4 polożono na stack
+4 zdjęto ze stacka
+3 zdjęto ze stacka
+12 polożono na stack
+12 zdjęto ze stacka
+2 zdjęto ze stacka
+24 polożono na stack
+24 zdjęto ze stacka
+Wystąpił błąd: za malo liczb na stosie
+
+ nowa seria:
+Wystąpił błąd: brak liczb na stosie
+
+ nowa seria:
+5 polożono na stack
+5 zdjęto ze stacka
+oto wynik = 5
+
+ nowa seria:
+2 polożono na stack
+-1 polożono na stack
+-12 polożono na stack
+21 polożono na stack
+21 zdjęto ze stacka
+-12 zdjęto ze stacka
+-252 polożono na stack
+-252 zdjęto ze stacka
+-1 zdjęto ze stacka
+0 polożono na stack
+0 zdjęto ze stacka
+2 zdjęto ze stacka
+Wystąpił błąd: nie mozna dzielic przez 0
+
+ nowa seria:
+Wystąpił błąd: Zły symbol: w
+
+ nowa seria:
+1 polożono na stack
+Wystąpił błąd: Zły symbol: .
+1 zdjęto ze stacka
+
+ nowa seria:
+Wystąpił błąd: brak liczb na stosie
+
+ nowa seria:
+2 polożono na stack
+3 polożono na stack
+3 zdjęto ze stacka
+2 zdjęto ze stacka
+5 polożono na stack
+5 zdjęto ze stacka
+oto wynik = 5
+
+ nowa seria:

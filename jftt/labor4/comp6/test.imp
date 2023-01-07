@@ -1,0 +1,8 @@
+PROGRAM IS
+VAR n, p
+BEGIN
+    READ n ;
+    p := n + 3 ;
+    WRITE p ;
+END
+

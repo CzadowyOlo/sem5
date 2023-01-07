@@ -1,0 +1,11 @@
+PROGRAM IS
+VAR n, p
+BEGIN
+    READ n ;
+    READ p ;
+    IF dupa = p THEN
+        WRITE 2137;
+    ENDIF
+    p := n + 3 ;
+    WRITE p ;
+END

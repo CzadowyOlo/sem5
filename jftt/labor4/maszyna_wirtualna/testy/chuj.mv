@@ -1,0 +1,5 @@
+GET 1
+SET 3
+ADD 1
+STORE 2
+PUT 2

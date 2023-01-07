@@ -1,0 +1,55 @@
+/* This tells flex to quit when it reaches EOF */
+%option noyywrap
+
+%{
+    /* definicje */
+    #include "comp.tab.hpp"
+    #include <iostream>
+    #include <cstdlib> // for atoi
+    
+    extern int yylex();
+%}
+
+%%
+"("                 {ECHO; yylval.sym = yytext; return LP;}
+")"                 {ECHO; yylval.sym = yytext; return RP;}
+","                 {ECHO; yylval.sym = yytext; return COMMA;}
+";"                 {ECHO; yylval.sym = yytext; return SEMICOLON;}
+"+"                 {ECHO; yylval.sym = yytext; return ADD;}
+"-"                 {ECHO; yylval.sym = yytext; return SUB;}
+"*"                 {ECHO; yylval.sym = yytext; return MUL;}
+"/"                 {ECHO; yylval.sym = yytext; return DIV;}
+"%"                 {ECHO; yylval.sym = yytext; return MOD;}
+"="                 {ECHO; yylval.sym = yytext; return EQ;}
+">"                 {ECHO; yylval.sym = yytext; return GREATER;}
+"<"                 {ECHO; yylval.sym = yytext; return LESS;}
+"!="                {ECHO; yylval.sym = yytext; return NEQ;}
+">="                {ECHO; yylval.sym = yytext; return GEQ;}
+"<="                {ECHO; yylval.sym = yytext; return LEQ;}
+":="                {ECHO; yylval.sym = yytext; return ASSIGN;}
+"PROCEDURE"         {ECHO; yylval.sym = yytext; return PROCEDURE;}
+"IS[ \t\r\n]+VAR"            {ECHO; yylval.sym = yytext; return IS_VAR;}
+"IS[ \t\r\n]+BEGIN"          {ECHO; yylval.sym = yytext; return IS_BEGIN;}
+"BEGIN"             {ECHO; yylval.sym = yytext; return BEGINN;}
+"END"               {ECHO; yylval.sym = yytext; return END;}
+"PROGRAM[ \t\r\n]+IS[ \t\r\n]+VAR"    {ECHO; yylval.sym = yytext; return PROGRAM_IS_VAR;}
+"PROGRAM[ \t\r\n]+IS[ \t\r\n]+BEGIN"  {ECHO; yylval.sym = yytext; return PROGRAM_IS_BEGIN;}
+"IF"                {ECHO; yylval.sym = yytext; return IF;}
+"THEN"              {ECHO; yylval.sym = yytext; return THEN;}
+"ELSE"              {ECHO; yylval.sym = yytext; return ELSE;}
+"ENDIF"             {ECHO; yylval.sym = yytext; return ENDIF;}
+"WHILE"             {ECHO; yylval.sym = yytext; return WHILE;}
+"DO"                {ECHO; yylval.sym = yytext; return DO;}
+"ENDWHILE"          {ECHO; yylval.sym = yytext; return ENDWHILE;}
+"REPEAT"            {ECHO; yylval.sym = yytext; return REPEAT;}
+"UNTIL"             {ECHO; yylval.sym = yytext; return UNTIL;}
+"READ"              {ECHO; yylval.sym = yytext; return READ;}
+"WRITE"             {ECHO; yylval.sym = yytext; return WRITE;}
+
+
+[0-9]+      {ECHO; yylval.val = atoi(yytext); return NUM;}
+[_a-z]+   {ECHO; yylval.sym = yytext; return IDENTIFIER;}
+[ \t\r\n]+            ;
+.           {}
+
+%%

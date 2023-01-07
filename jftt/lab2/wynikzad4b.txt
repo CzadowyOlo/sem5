@@ -1,0 +1,85 @@
+2 polożono na stack
+3 polożono na stack
+3 zdjęto ze stacka
+2 zdjęto ze stacka
+5 polożono na stack
+4 polożono na stack
+4 zdjęto ze stacka
+5 zdjęto ze stacka
+20 polożono na stack
+20 zdjęto ze stacka
+oto wynik = 20
+
+ nowa seria:
+1 polożono na stack
+2 polożono na stack
+3 polożono na stack
+4 polożono na stack
+4 zdjęto ze stacka
+3 zdjęto ze stacka
+7 polożono na stack
+7 zdjęto ze stacka
+2 zdjęto ze stacka
+14 polożono na stack
+14 zdjęto ze stacka
+1 zdjęto ze stacka
+-13 polożono na stack
+-13 zdjęto ze stacka
+oto wynik = -13
+
+ nowa seria:
+-1 polożono na stack
+2 polożono na stack
+-3 polożono na stack
+4 polożono na stack
+4 zdjęto ze stacka
+-3 zdjęto ze stacka
+1 polożono na stack
+1 zdjęto ze stacka
+2 zdjęto ze stacka
+2 polożono na stack
+2 zdjęto ze stacka
+-1 zdjęto ze stacka
+-3 polożono na stack
+-3 zdjęto ze stacka
+oto wynik = -3
+
+ nowa seria:
+2 polożono na stack
+3 polożono na stack
+2 polożono na stack
+2 zdjęto ze stacka
+3 zdjęto ze stacka
+9 polożono na stack
+9 zdjęto ze stacka
+2 zdjęto ze stacka
+512 polożono na stack
+512 zdjęto ze stacka
+oto wynik = 512
+
+ nowa seria:
+2 polożono na stack
+3 polożono na stack
+3 zdjęto ze stacka
+2 zdjęto ze stacka
+5 polożono na stack
+5 zdjęto ze stacka
+Wystąpił błąd: za malo liczb na stosie
+
+ nowa seria:
+2 polożono na stack
+3 polożono na stack
+4 polożono na stack
+4 zdjęto ze stacka
+3 zdjęto ze stacka
+7 polożono na stack
+7 zdjęto ze stacka
+Wystąpił błąd: za mało operatorów
+2 zdjęto ze stacka
+
+ nowa seria:
+2 polożono na stack
+Wystąpił błąd: Zły symbol: .
+2 zdjęto ze stacka
+
+ nowa seria:

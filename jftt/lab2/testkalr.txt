@@ -1,0 +1,5 @@
+5 polożono na stack
+5 zdjęto ze stacka
+oto wynik = 5
+
+ nowa seria:
