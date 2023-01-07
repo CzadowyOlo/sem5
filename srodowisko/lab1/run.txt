@@ -1,0 +1,7 @@
+./zad1.bash /home/aleksander/sem5/srodowisko/lab1
+./zad2.bash /home/aleksander/sem5/srodowisko/lab1/testy
+./zad3.bash /home/aleksander/sem5/srodowisko/lab1/testy1
+./zad4.bash /home/aleksander/sem5/srodowisko/lab1/testy1
+./zad5.bash /home/aleksander/sem5/srodowisko/lab1/testy2
+./zad6.bash /home/aleksander/sem5/srodowisko/lab1/testy2
+

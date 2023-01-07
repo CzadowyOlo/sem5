@@ -1,0 +1,134 @@
+openapi: 3.0.3
+info:
+  title: Simple Calculator
+  description: This is a simple Calculator Server.
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- name: pair
+  description: Ordered pair of integers
+paths:
+  /pair/add:
+    post:
+      tags:
+      - pair
+      summary: add two numbers from pair
+      description: add two numbers from pair
+      operationId: add_nums
+      requestBody:
+        description: Add two numbers from pair
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pair'
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Number'
+        "405":
+          description: Invalid input
+      x-openapi-router-controller: swagger_server.controllers.pair_controller
+  /pair/subtract:
+    post:
+      tags:
+      - pair
+      summary: subtract two numbers from pair
+      description: subtract two numbers from pair
+      operationId: sub_nums
+      requestBody:
+        description: Subtract two numbers from pair
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pair'
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Number'
+        "405":
+          description: Invalid input
+      x-openapi-router-controller: swagger_server.controllers.pair_controller
+  /pair/multiply:
+    post:
+      tags:
+      - pair
+      summary: multiply two numbers from pair
+      description: multiply two numbers from pair
+      operationId: multi_nums
+      requestBody:
+        description: Multiply two numbers from pair
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pair'
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Number'
+        "405":
+          description: Invalid input
+      x-openapi-router-controller: swagger_server.controllers.pair_controller
+  /pair/divide:
+    post:
+      tags:
+      - pair
+      summary: divide two numbers from pair
+      description: divide two numbers from pair
+      operationId: div_nums
+      requestBody:
+        description: Multiply two numbers from pair
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pair'
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Number'
+        "405":
+          description: Invalid input
+      x-openapi-router-controller: swagger_server.controllers.pair_controller
+components:
+  schemas:
+    Pair:
+      type: object
+      properties:
+        number1:
+          type: integer
+          format: int64
+          example: 10
+        number2:
+          type: integer
+          format: int64
+          example: 12
+      xml:
+        name: pair
+    Number:
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int64
+          example: 12
+      example:
+        value: 12
+      xml:
+        name: number
+
