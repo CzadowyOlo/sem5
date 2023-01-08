@@ -121,8 +121,6 @@ void add(string &dupa, size_t &k, map<string, int> p, string v1, string v2)
 // void is_greater(int a, int b);
 // void is_less(int a, int b);
 
-
-
 // void write_val(string &dupa, size_t &k, map<string, int> p, int a);
 // void write_val(string &dupa, size_t &k, map<string, int> p, string id);
 // void write_val(string &dupa, size_t &k, map<string, int> p, int a){
@@ -166,14 +164,34 @@ void assign_val(string &dupa, size_t &k, map<string, int> p, string val) {
 
 
 void is_notequal(string& dupa, size_t& k, map<string, int> p, string v1, string v2){
-    dupa = dupa + 
-    "LOAD " + to_string(p[v1]) + "\n" +
-    "SUB "  + to_string(p[v2]) + "\n" +
-    "JPOS " + to_string(k+5) + "\n" +
-    "LOAD " + to_string(p[v2]) + "\n" +
-    "SUB "  + to_string(p[v1]) + "\n" +
-    "JZERO ";
-    k += 6;
+    if (isdigit(v1[0])) {
+        int a = stoi(v1);
+        if (isdigit(v2[0])) {
+            //oba numy  
+        }
+        else {
+            //v1 num, v2 identifier
+       
+        }
+    }
+    else {
+        if (isdigit(v2[0])) {
+            //v1 identifier, v2 num
+
+        }
+        else {
+            // oba identifier
+            dupa = dupa + 
+            "LOAD " + to_string(p[v1]) + "\n" +
+            "SUB "  + to_string(p[v2]) + "\n" +
+            "JPOS " + to_string(k+5) + "\n" +
+            "LOAD " + to_string(p[v2]) + "\n" +
+            "SUB "  + to_string(p[v1]) + "\n" +
+            "JZERO ";
+            k += 6;
+
+        }
+    }
 }
 void is_equal(string& dupa, size_t& k, map<string, int> p, string v1, string v2){
     dupa = dupa + 
@@ -185,6 +203,33 @@ void is_equal(string& dupa, size_t& k, map<string, int> p, string v1, string v2)
     "JPOS ";
     k += 6;
 }
-
+void is_greater(string& dupa, size_t& k, map<string, int> p, string v1, string v2){
+    dupa = dupa + 
+    "LOAD " + to_string(p[v1]) + "\n" +
+    "SUB "  + to_string(p[v2]) + "\n" +
+    "JZERO ";
+    k += 3;
+}
+void is_less(string& dupa, size_t& k, map<string, int> p, string v1, string v2){
+    dupa = dupa + 
+    "LOAD " + to_string(p[v2]) + "\n" +
+    "SUB "  + to_string(p[v1]) + "\n" +
+    "JZERO ";
+    k += 3;
+}
+void is_gequal(string& dupa, size_t& k, map<string, int> p, string v1, string v2){
+    dupa = dupa + 
+    "LOAD " + to_string(p[v2]) + "\n" +
+    "SUB "  + to_string(p[v1]) + "\n" +
+    "JPOS ";
+    k += 3;
+}
+void is_lequal(string& dupa, size_t& k, map<string, int> p, string v1, string v2){
+    dupa = dupa + 
+    "LOAD " + to_string(p[v1]) + "\n" +
+    "SUB "  + to_string(p[v2]) + "\n" +
+    "JPOS ";
+    k += 3;
+}
 
 

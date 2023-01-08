@@ -21,9 +21,13 @@ FILE *fout;
 map<std::string, int> p {{"acc", 0}};
 size_t p_len = 1;
 size_t k = 0;
+size_t l = 0;
+
 string dupa = ""; // kod assemblera w zmiennej dupa
 string cipka = "";
 string cipkaa = "";
+string cipkaaa = "";
+
 
 %}
 %code requires {
@@ -55,7 +59,7 @@ procedures:
 |   %empty
 
 main:
-    PROGRAM_IS_VAR declarations BEGINN commands END {dupa += $4 + "HALT\n"; cout<<"CIPASKO\n"; k++;}
+    PROGRAM_IS_VAR declarations BEGINN commands END {dupa = $4 + "HALT\n"; cout<<"CIPASKO\n"; k++;}
 |   PROGRAM_IS_BEGIN commands END
 
 commands:
@@ -65,13 +69,14 @@ commands:
 
 command:
     IDENTIFIER ASSIGN expression ';'                {cipka = ""; assign_val(cipka, k, p, $1); $$ = $3 + cipka;}
-|   IF condition THEN commands ELSE commands ENDIF
+|   IF condition THEN commands ELSE commands ENDIF  {cipka = $2; cipkaa = $4; cipka += to_string(k); cipkaa = $6; $$ = cipka + cipkaa + "JUMP " + to_string(k) + "\n" + cipkaa; k++;}
 |   IF condition THEN commands ENDIF                {cipka = ""; cipkaa = ""; cipka = $2; cipkaa = $4; cipka += to_string(k) + "\n"; cout<<cipka + "\n" + cipkaa + "\n"; $$ = cipka + cipkaa;}
-|   WHILE condition DO commands ENDWHILE
-|   REPEAT commands UNTIL condition ';'
+|   WHILE condition DO commands ENDWHILE            {int l = 1; cipka = $2; cipkaa = $4; $$ = cipka + to_string(k) + "\n" + cipkaa + cipka; cipkaaa = cipka + cipkaa; l = count(cipkaaa.begin(), cipkaaa.end(), '\n')+1; l= k-l; $$ += to_string(l) + "\n";}
+|   REPEAT commands UNTIL condition ';'             {int l = 1; cipka = $2; cipkaa = $4; cipka = cipka + cipkaa; l = count(cipka.begin(), cipka.end(), '\n')+1; l= k-l; $$ = cipka + to_string(l) + "\n";}
 |   proc_head ';'
 |   READ IDENTIFIER ';'                             {cipka = ""; read_val(cipka, k, p, $2); $$ = cipka;}
 |   WRITE value ';'                                 {cipka = ""; write_val(cipka, k, p, $2);$$ = cipka;}
+
 
 
 proc_head:
@@ -91,7 +96,7 @@ expression:
 
 condition:
     value '=' value     {cipka = ""; is_equal(cipka, k, p, $1, $3); $$ = cipka;}
-|   value '>' value     {}
+|   value '>' value     {cipka = ""; is_greater(cipka, k, p, $1, $3); $$ = cipka;}
 |   value '<' value     {}
 |   value GEQ value     {}
 |   value LEQ value     {}
@@ -136,7 +141,7 @@ int main(int argc, char const * argv[]){
         std::cout << "dupcia: " << elem.first << " " << elem.second << endl;
     }
     string kobieta = dupa + cipka;
-    out << kobieta;
+    out << dupa;
     fclose(data);
     //fclose(out);
     return 0;
